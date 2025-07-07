@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Antonio", sans-serif;
+}
+
+@keyframes scrollX {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@layer utilities {
+  .div1 {
+    grid-area: div1;
+  }
+  .div2 {
+    grid-area: div2;
+  }
+  .div3 {
+    grid-area: div3;
+  }
+  .div4 {
+    grid-area: div4;
+  }
+  .div5 {
+    grid-area: div5;
+  }
+  .div6 {
+    grid-area: div6;
+  }
+  .div7 {
+    grid-area: div7;
+  }
+  .div8 {
+    grid-area: div8;
+  }
+  .div9 {
+    grid-area: div9;
+  }
+
+  .grid-areas-gallery {
+    grid-template-areas:
+      "div1 div2"
+      "div1 div3"
+      "div4 div4"
+      "div5 div6"
+      "div7 div9"
+      "div8 div9";
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
