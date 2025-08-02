@@ -1,7 +1,7 @@
 import { FaCheck } from "react-icons/fa";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion, useAnimation, type Variants } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 const links = [
@@ -13,9 +13,11 @@ const links = [
 
 const Navigation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const controls = useAnimation();
+  const [activeLink, setActiveLink] = useState<string | null>(null);
   const { ref, inView } = useInView({
-    threshold: 0.2,
+    threshold: 0.1,
     triggerOnce: false,
   });
 
@@ -27,15 +29,22 @@ const Navigation = () => {
     }
   }, [inView, controls]);
 
+  useEffect(() => {
+    // Set initial active link based on current path
+    const currentLink = links.find((link) => link.path === location.pathname);
+    if (currentLink) {
+      setActiveLink(currentLink.path);
+    }
+  }, [location.pathname]);
+
   const containerVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         ease: "easeInOut",
-        staggerChildren: 0.15,
+        staggerChildren: 0.1,
         delayChildren: 0.2,
       },
     },
@@ -44,70 +53,108 @@ const Navigation = () => {
   const itemVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 30,
-      rotateX: -15,
+      y: 20,
+      scale: 0.95,
     },
     visible: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
+      scale: 1,
       transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15,
+        type: "spring",
+        stiffness: 120,
+        damping: 12,
+        mass: 0.5,
       },
+    },
+    hover: {
+      y: -8,
+      scale: 1.03,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 12,
+      },
+    },
+    tap: {
+      scale: 0.95,
     },
   };
 
+  const handleLinkClick = (path: string) => {
+    if (activeLink === path) {
+      // If clicking the active link, navigate to works page
+      navigate("/works");
+      setActiveLink(null);
+    } else {
+      // Otherwise navigate to the selected link
+      navigate(path);
+      setActiveLink(path);
+    }
+  };
+
   return (
-    <div className="py-10">
-      <motion.div
+    <div className="py-6 sm:py-8 md:py-10 lg:py-12 px-4 sm:px-6 lg:px-8">
+      <motion.nav
         ref={ref}
-        className="border-y border-[#FFFFFF66] py-10 sm:py-16 text-[#ECECEC] uppercase"
+        className="border-y border-white/10 py-8 sm:py-12 md:py-14 lg:py-16 text-white uppercase"
         variants={containerVariants}
         initial="hidden"
         animate={controls}
       >
-        <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-[30px] px-4">
+        <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8">
           {links.map((link, index) => {
-            const isActive = location.pathname === link.path;
+            const isActive = activeLink === link.path;
             return (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{
-                  scale: 1.05,
-                  y: -3,
-                  transition: {
-                    type: "spring" as const,
-                    stiffness: 300,
-                    damping: 12,
-                  },
-                }}
+                whileHover="hover"
+                whileTap="tap"
                 className="relative group"
               >
-                <motion.div className="absolute inset-0 bg-white/5 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300 ease-out" />
-                <NavLink
-                  to={link.path}
-                  className="flex items-center gap-3 sm:gap-[12px] max-w-full relative z-10"
+                <motion.div
+                  className="absolute inset-0 bg-white/5 rounded-full opacity-0 group-hover:px-2 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: isActive ? 1.1 : 1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                />
+                <button
+                  onClick={() => handleLinkClick(link.path)}
+                  className="flex items-center gap-2 sm:gap-3 md:gap-4 relative z-10 focus:outline-none"
                 >
                   <motion.div
-                    className={`w-[44px] sm:w-[50px] h-[44px] sm:h-[50px] border border-[#FFFFFF40] rounded-full flex items-center justify-center transition-all duration-300 ${
-                      isActive ? "bg-[#FFFFFF40] text-[#FFFFFF]" : ""
+                    className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 border border-white/30 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      isActive ? "bg-white/20" : "bg-transparent"
                     }`}
-                    whileTap={{ scale: 0.95 }}
+                    animate={{
+                      rotate: isActive ? 360 : 0,
+                      backgroundColor: isActive
+                        ? "rgba(255,255,255,0.2)"
+                        : "transparent",
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
                   >
-                    {isActive && <FaCheck className="text-[16px]" />}
+                    {isActive && (
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        transition={{ type: "spring", stiffness: 500 }}
+                      >
+                        <FaCheck className="text-sm sm:text-base md:text-lg" />
+                      </motion.span>
+                    )}
                   </motion.div>
-                  <motion.h6 className="text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] leading-snug font-[400]">
+                  <motion.span className="uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl font-light tracking-tight">
                     {link.label}
-                  </motion.h6>
-                </NavLink>
+                  </motion.span>
+                </button>
               </motion.div>
             );
           })}
         </div>
-      </motion.div>
+      </motion.nav>
     </div>
   );
 };

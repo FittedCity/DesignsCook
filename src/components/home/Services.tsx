@@ -67,7 +67,7 @@ const Services = () => {
   }, [isInView]);
 
   const { displayedText, isTyping } = useTypewriter(
-    "from blueprint\nto build",
+    "from blueprint\n to build",
     80,
     100,
     startTyping

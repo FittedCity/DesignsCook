@@ -16,9 +16,7 @@ const Testimony = () => {
         className="relative z-40 text-white uppercase"
       >
         <h2 className="font-[250] text-[20px] sm:text-[24px] md:text-[36px] lg:text-[48px] leading-relaxed tracking-tight">
-          "Lorem ipsum dolor sit amet consectetur. Nulla lectus lorem sed sed.
-          Quam sit velit pretium porttitor eget varius massa. Lorem nibh
-          facilisis nunc suscipit. Tellus consequat id urna id orci volutpat."
+          "DesginsCook consistently delivers high-quality 3d renderings that bring our construction projects to life. Their visuals helps us communicate clearly with clients and speed up approvals. The accuracy and detail are unmatched"
         </h2>
 
         <motion.div
@@ -35,10 +33,10 @@ const Testimony = () => {
           />
           <div className="flex flex-col items-center sm:items-start gap-1 sm:gap-2">
             <h1 className="font-[400] text-[20px] sm:text-[24px] md:text-[32px] leading-tight">
-              Bola Tinubu
+              Ayodele Lawal
             </h1>
-            <h3 className="font-[250] text-[16px] sm:text-[18px] md:text-[24px] leading-tight">
-              Hollowell
+            <h3 className="font-[250] text-[16px] capitalize sm:text-[18px] md:text-[24px] leading-tight">
+              HollowellAEC
             </h3>
           </div>
         </motion.div>

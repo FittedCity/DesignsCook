@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Instagram, Youtube, Linkedin, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -57,16 +58,47 @@ const Footer = () => {
               <li className="hover:underline cursor-pointer">
                 <Link to="contacts">Contact</Link>
               </li>
+              <li className="flex items-center gap-2 hover:underline cursor-pointer">
+                <Mail size={16} />
+                <a href="mailto:hello@designscook.com">hello@designscook.com</a>
+              </li>
             </ul>
           </div>
 
-          {/* Socials */}
+          {/* Socials with Icons */}
           <div className="flex flex-col gap-2 sm:gap-3 min-w-[120px]">
             <h4 className="text-base sm:text-lg font-medium">Socials</h4>
-            <ul className="flex flex-col gap-1 sm:gap-2 text-xs sm:text-sm font-light">
-              <li className="hover:underline cursor-pointer">Instagram</li>
-              <li className="hover:underline cursor-pointer">YouTube</li>
-              <li className="hover:underline cursor-pointer">LinkedIn</li>
+            <ul className="flex flex-col gap-2 text-xs sm:text-sm font-light">
+              <li className="flex items-center gap-2 hover:underline cursor-pointer">
+                <Instagram size={16} />
+                <a
+                  href="https://instagram.com/designscook?igsh=azhneTJzaijlwdzhq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Instagram
+                </a>
+              </li>
+              <li className="flex items-center gap-2 hover:underline cursor-pointer">
+                <Youtube size={16} />
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  YouTube
+                </a>
+              </li>
+              <li className="flex items-center gap-2 hover:underline cursor-pointer">
+                <Linkedin size={16} />
+                <a
+                  href="https://linkedin.com/in/designs-cook-72b0909b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
+              </li>
             </ul>
           </div>
         </div>

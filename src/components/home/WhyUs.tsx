@@ -9,7 +9,7 @@ const WhyUs = () => {
     "Fast Turnarounds",
     "Eye for Detail & Design",
     "Team with Architectural Expertise",
-    "Fast Turnarounds",
+    "Innovation-Driven",
   ];
 
   return (

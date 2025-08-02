@@ -16,7 +16,7 @@ const Works = () => {
         <div className="sm:pt-56 pt-28">
           <Banner
             title="Our Work"
-            backgroundImage="/assets/works/works-banner.png"
+            backgroundVideo="/assets/works/works-banner.mp4"
           />
         </div>
         <Navigation />

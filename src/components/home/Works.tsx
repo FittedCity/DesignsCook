@@ -35,8 +35,8 @@ const animationSubsections: Subsection[] = [
       "For visionary developments and architectural competitions where distinctiveness is everything, our Signature Film delivers more than visuals — it tells a story with cinematic depth. With custom VFX, 2D motion graphics, and creative direction, we craft films that elevate architecture into unforgettable visual narratives.",
   },
   {
-    id: "cinemograph",
-    title: "Cinemograph",
+    id: "cinematography",
+    title: "Cinematography",
     content:
       "We create high-quality cinemagraphs that blend stillness and movement to draw attention, elevate mood, and bring your architectural visuals to life. Perfect for social media, websites, and digital campaigns.",
   },
@@ -98,7 +98,7 @@ const Works: React.FC = () => {
     {
       title: "Product Design",
       mediaType: "video",
-      mediaSrc: "/assets/home/productDesign.mp4",
+      mediaSrc: "/assets/home/animation.mp4",
       side: "left",
       subsections: productSubsections,
     },

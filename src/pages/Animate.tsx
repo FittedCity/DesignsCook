@@ -9,7 +9,7 @@ const Animate = () => {
       <div className="bg-[#151515] px-4 sm:px-6 md:px-[5%]">
         <div className="sm:pt-56 pt-28">
           <Banner
-            title="3d Animation"
+            title="3D Animation"
             backgroundImage="/assets/3d-animation/animate-banner.jpg"
           />
         </div>
